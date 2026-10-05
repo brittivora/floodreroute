@@ -227,15 +227,51 @@ let selected = "safest", pickTarget = "origin", svg, markers = [];
 const locations = { origin: null, dest: null };
 
 /* ── boot ───────────────────────────────────────────────────────── */
-Promise.all([
-  fetch(`${API_BASE}/health`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-  fetch(`${API_BASE}/current-conditions`).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-])
-  .then(([h, c]) => { health = h; conditions = c; init(); })
-  .catch(e => {
-    document.getElementById("loading").textContent =
-      "Routing service unavailable. Start the API on port 8000. (" + e + ")";
-  });
+async function connectToApi(attempt = 1){
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try{
+    const [graph, weather] = await Promise.all([
+      fetch(`${API_BASE}/health`, {signal:controller.signal})
+        .then(response => { if (!response.ok) throw new Error(response.status); return response.json(); }),
+      fetch(`${API_BASE}/current-conditions`, {signal:controller.signal})
+        .then(response => { if (!response.ok) throw new Error(response.status); return response.json(); }),
+    ]);
+    health = graph;
+    conditions = weather;
+    init();
+  }catch(error){
+    if (attempt < 7){
+      document.getElementById("loading").textContent =
+        `Waking the routing service... retry ${attempt} of 6`;
+      setTimeout(() => connectToApi(attempt + 1), Math.min(1000 * 2 ** (attempt - 1), 8000));
+    }else{
+      showConnectionError();
+    }
+  }finally{
+    clearTimeout(timeout);
+  }
+}
+
+function showConnectionError(){
+  const panel = document.createElement("div");
+  panel.style.cssText = "display:grid;gap:12px;max-width:320px;padding:20px;text-align:center";
+  const message = document.createElement("div");
+  message.textContent = "Could not reach the routing service. Check your connection and try again.";
+  const retry = document.createElement("button");
+  retry.type = "button";
+  retry.className = "find-route";
+  retry.textContent = "Retry connection";
+  retry.onclick = () => {
+    panel.replaceChildren();
+    document.getElementById("loading").textContent = "Connecting to routing service...";
+    connectToApi();
+  };
+  panel.append(message, retry);
+  document.getElementById("loading").replaceChildren(panel);
+}
+
+connectToApi();
 
 function init(){
   buildControls();
