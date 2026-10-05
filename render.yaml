@@ -12,12 +12,12 @@ services:
       - key: FLOOD_GRAPH_MODE
         value: small
       - key: FLOOD_GRAPH_AREA_LABEL
-        value: "Central Mumbai: Dadar, Bandra, BKC, Kurla"
+        value: "West Central Mumbai: Juhu, Vile Parle, Bandra, BKC, Kurla"
       - key: FLOOD_GRAPH_CENTER_LAT
-        value: "19.039"
+        value: "19.065"
       - key: FLOOD_GRAPH_CENTER_LON
-        value: "72.855"
+        value: "72.850"
       - key: FLOOD_GRAPH_RADIUS_M
-        value: "4000"
+        value: "5000"
       - key: FLOOD_GRAPH_CACHE
         value: render_graph.graphml

@@ -55,9 +55,9 @@ app.add_middleware(
 CITY_CENTER = (19.076, 72.877)
 FALLBACK_RAINFALL_MM_HR = 10.0
 GRAPH_MODE = os.environ.get("FLOOD_GRAPH_MODE", "city").strip().lower()
-GRAPH_CENTER_LAT = float(os.environ.get("FLOOD_GRAPH_CENTER_LAT", "19.039"))
-GRAPH_CENTER_LON = float(os.environ.get("FLOOD_GRAPH_CENTER_LON", "72.855"))
-GRAPH_RADIUS_M = int(os.environ.get("FLOOD_GRAPH_RADIUS_M", "4000"))
+GRAPH_CENTER_LAT = float(os.environ.get("FLOOD_GRAPH_CENTER_LAT", "19.065"))
+GRAPH_CENTER_LON = float(os.environ.get("FLOOD_GRAPH_CENTER_LON", "72.850"))
+GRAPH_RADIUS_M = int(os.environ.get("FLOOD_GRAPH_RADIUS_M", "5000"))
 GRAPH_AREA_LABEL = os.environ.get(
     "FLOOD_GRAPH_AREA_LABEL",
     "Full Greater Mumbai" if GRAPH_MODE == "city" else "Configured bounded area",

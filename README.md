@@ -34,11 +34,11 @@ choose a different cache path.
 ## Render demo
 
 `render.yaml` defines a single free web service for both the API and map UI.
-It packages `render_graph.graphml`, a prebuilt 4 km-radius OSM road graph with
-6,112 nodes centered near Dadar, Bandra, BKC, and Kurla. The build loads this
-cache instead of depending on Render's access to the Overpass API. Picks too
-far from the included roads are rejected instead of being routed to a
-misleading nearby node.
+It packages `render_graph.graphml`, a prebuilt 5 km-radius OSM road graph with
+about 8,000 nodes covering Juhu, Vile Parle, Bandra, BKC, and Kurla. The build
+loads this cache instead of depending on Render's access to the Overpass API.
+Picks too far from the included roads are rejected instead of being routed to
+a misleading nearby node.
 
 Deploy the Blueprint from a Git repository containing this project and its
 Render files. Open the resulting service URL to use the same search-and-map UI.
