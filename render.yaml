@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: floodreroute-mumbai-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-render.txt && python build_render_graph.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: FLOOD_GRAPH_MODE
+        value: small
+      - key: FLOOD_GRAPH_AREA_LABEL
+        value: "Central Mumbai: Dadar, Bandra, BKC, Kurla"
+      - key: FLOOD_GRAPH_CENTER_LAT
+        value: "19.039"
+      - key: FLOOD_GRAPH_CENTER_LON
+        value: "72.855"
+      - key: FLOOD_GRAPH_RADIUS_M
+        value: "4000"
+      - key: FLOOD_GRAPH_CACHE
+        value: render_graph.graphml
