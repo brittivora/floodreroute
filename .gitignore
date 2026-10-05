@@ -3,6 +3,7 @@
 __pycache__/
 cache/
 *.graphml
+!render_graph.graphml
 !*.graphml.gz
 /{
 /l.id))

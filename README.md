@@ -34,10 +34,11 @@ choose a different cache path.
 ## Render demo
 
 `render.yaml` defines a single free web service for both the API and map UI.
-Its build creates a bounded 4 km-radius road graph centered near Dadar,
-Bandra, BKC, and Kurla, then packages that cache with the service. The smaller
-graph is intended for a live demo on Render; picks too far from its roads are
-rejected instead of being routed to a misleading nearby node.
+It packages `render_graph.graphml`, a prebuilt 4 km-radius OSM road graph with
+6,112 nodes centered near Dadar, Bandra, BKC, and Kurla. The build loads this
+cache instead of depending on Render's access to the Overpass API. Picks too
+far from the included roads are rejected instead of being routed to a
+misleading nearby node.
 
 Deploy the Blueprint from a Git repository containing this project and its
 Render files. Open the resulting service URL to use the same search-and-map UI.
@@ -72,6 +73,7 @@ flood-prone locations. This data is pre-computed and cached:
 - `router.py` — risk-weighted A* routing
 - `gee_sar.py` — Google Earth Engine Sentinel-1 SAR flood detection module
 - `generate_sar_cache.py` — batch pre-computes SAR flood history for all road nodes
+- `render_graph.graphml` — bounded road graph packaged for Render
 - `mumbai_sar_flood_history.json` — cached SAR flood frequency data (3,880 nodes)
 - `mumbai_graph_cache.graphml` — cached Mumbai road network (101,907 nodes)
 - `static/index.html` — Leaflet frontend, free OpenStreetMap tiles
