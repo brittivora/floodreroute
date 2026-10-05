@@ -18,6 +18,6 @@ services:
       - key: FLOOD_GRAPH_CENTER_LON
         value: "72.850"
       - key: FLOOD_GRAPH_RADIUS_M
-        value: "5000"
+        value: "4500"
       - key: FLOOD_GRAPH_CACHE
         value: render_graph.graphml

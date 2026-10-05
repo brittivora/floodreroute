@@ -8,7 +8,7 @@ from graph_utils import get_graph
 os.environ.setdefault("FLOOD_GRAPH_MODE", "small")
 os.environ.setdefault("FLOOD_GRAPH_CENTER_LAT", "19.065")
 os.environ.setdefault("FLOOD_GRAPH_CENTER_LON", "72.850")
-os.environ.setdefault("FLOOD_GRAPH_RADIUS_M", "5000")
+os.environ.setdefault("FLOOD_GRAPH_RADIUS_M", "4500")
 os.environ.setdefault("FLOOD_GRAPH_CACHE", "render_graph.graphml")
 
 if os.environ["FLOOD_GRAPH_MODE"].lower() != "small":
